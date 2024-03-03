@@ -15,11 +15,16 @@ import org.junit.Test;
  */
 public class ReusablePoolTest {
 
+		
+	private ReusablePool pool;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		pool = ReusablePool.getInstance();
+		
 	}
 
 	/**
@@ -27,6 +32,7 @@ public class ReusablePoolTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		pool = null;
 	}
 
 	/**
@@ -34,7 +40,11 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		ReusablePool pool = ReusablePool.getInstance();
+		// No es nulo
+		assertNotNull(pool); 
+		// el objeto devuelto es una instancia de ReublePool
+		assertTrue(pool instanceof ReusablePool);
 	}
 
 	/**
