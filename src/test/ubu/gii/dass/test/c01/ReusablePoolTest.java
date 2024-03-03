@@ -79,7 +79,19 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testReleaseReusable() {
-		fail("Not yet implemented");
-	}
+		try {
+            ReusablePool pool = ReusablePool.getInstance();
+            Reusable reusableInstance = pool.acquireReusable();
+
+            // Liberar la instancia
+            pool.releaseReusable(reusableInstance);
+
+            // Verificar que la instancia liberada está en el pool después de la liberación
+            assertTrue("La instancia de Reusable debería estar en el pool después de ser liberada", pool.getReusables().contains(reusableInstance));
+
+        } catch (NotFreeInstanceException | DuplicatedInstanceException e) {
+            fail("No se esperaba ninguna excepción");
+        }
+    }
 
 }
