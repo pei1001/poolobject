@@ -52,7 +52,26 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testAcquireReusable() {
-		fail("Not yet implemented");
+        ReusablePool reusablePool = ReusablePool.getInstance();
+        
+        try {
+            Reusable reusableInstance = reusablePool.acquireReusable();
+            
+            // Asegura que la instancia no es nula
+            assertNotNull("Se adquirió un objeto reusable", reusableInstance);
+            
+            // Asegura que la instancia devuelta es de tipo Reusable
+            assertTrue(reusableInstance instanceof Reusable);
+            
+            // Caso 1: Se adquiere un objeto cuando reusables.size() > 0
+            Reusable reusableInstance1 = reusablePool.acquireReusable();
+            assertNotNull("Se adquirió un objeto reusable", reusableInstance1);
+
+              
+        } catch (NotFreeInstanceException e) {
+            fail("No se esperaba la excepción NotFreeInstanceException");
+        }
+  
 	}
 
 	/**
